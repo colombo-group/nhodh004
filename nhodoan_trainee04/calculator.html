@@ -1,0 +1,101 @@
+<html>
+<header>
+<meta charset="UTF-8">
+<title>Calculator</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+<style type="text/css">
+.calculator{
+  text-align: center;
+  background-color: #666666;
+    top: 0; left: 0; right: 0; bottom: 0;
+  width: 330px;
+  height: 440px;
+  margin: auto;
+  border-radius: 10px;
+  padding: 5px;
+}
+.text{
+  background-color: white;
+  height: 60px;
+  width: 280px;
+}
+.tble{
+  padding-top: 50px;
+  margin: auto; 
+}
+.button{
+  font-size: 20px;
+  text-align: center;
+  width: 60px;
+  height: 40px;
+  border-radius: 10px;
+ 
+  
+  margin: 4px;
+}
+h3{
+  font-family: "Roboto";
+  color: #56aaf2;
+}
+</style>
+<script type="text/javascript">
+
+var text="";
+var clear=false;
+var temp="";
+$(document).ready(function(){
+  $("button").click(function(){
+      var tepm = $(this).attr("value");
+ if(tepm==="0"||tepm==="1"||tepm==="2"||tepm==="3"||tepm==="4"||tepm==="5"||tepm==="5"||tepm==="6"||tepm==="7"||tepm==="8"||tepm==="9"||tepm==="/"||tepm==="*"||tepm==="%"||tepm==="+"||tepm==="-"||tepm==="."){  if(clear===false) {text +=tepm; $(".text").val(text);}  else { text=tepm; $(".text").val(text); clear=false;}}
+if(tepm==="AC"){text=""; $(".text").val(text);}
+if(tepm==="CE"){ text= text.slice(0, -1); $(".text").val(text);   }
+if(tepm==="="){ temp = eval(text); $(".text").val(temp); clear= true;}
+                   
+  });
+});
+</script>
+</header>
+<body>
+<div class="calculator">
+  <h3> <i>Ứng dụng máy tính cầm tay</i></h3>
+ 
+   <input type="text" class="text" readonly style=" font-size: 40px">
+   <table class="tble">
+    
+    <tr>
+      <td> <button class="button" value="AC">AC</button></td>
+      <td> <button class="button" value="CE">CE</button></td>
+      <td> <button class="button" value="%">%</button></td>
+      <td> <button class="button" value="/">/</button></td>
+    </tr>
+    <tr>
+      <td> <button class="button" value="7">7</button></td>
+      <td> <button class="button" value="8">8</button></td>
+      <td> <button class="button" value="9">9</button></td>
+      <td> <button class="button" value="*">*</button></td>
+    </tr>
+    <tr>
+      <td> <button class="button" value="4">4</button></td>
+      <td> <button class="button" value="5">5</button></td>
+      <td> <button class="button" value="6">6</button></td>
+      <td> <button class="button" value="+">+</button></td>
+    </tr>
+    <tr>
+      <td> <button class="button" value="1">1</button></td>
+      <td> <button class="button" value="2">2</button></td>
+      <td> <button class="button" value="3">3</button></td>
+      <td> <button class="button" value="-">-</button></td>
+    </tr>
+     </table>
+    <tr>
+      <td> <button class="button" value=".">.</button></td>
+      <td> <button class="button" value="0">0</button></td>
+      <td> <button class="button" style="width: 130px"value="=">=</button></td>
+    </tr>
+  
+</div>
+</body>
+</html>

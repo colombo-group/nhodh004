@@ -1,0 +1,163 @@
+<html>
+<header>
+<meta charset="UTF-8">
+<title>Calendar</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+<style type="text/css">
+body{
+  text-align: center;
+}
+.container{
+margin-left: 600px;
+  background-color: #f2f2f2;
+  top:0; left:0; bottom:0; right:0;
+  width: 550px;
+  height: 550px;
+}
+#header{
+   margin-top: 50px;
+  height: 50px;
+  font-size: 50px;
+}
+#calendar-month{
+  color: red;
+  margin-top: 50px;
+  height: 50px;
+  font-size: 40px;
+  font-family: Arial, Verdana, "Times New Roman";
+}
+#calendar{ 
+  text-align: center;
+  
+  margin-left: 60px;
+  margin-right: 20px;
+}
+.today{
+  background-color: red;
+  color: white;
+}
+#calendar  table tr td{
+background-color: #f0f8ff;
+   width: 30px;
+   padding: 15px;
+   border: solid 1px #d3d3d3;
+		}
+
+h1{
+  margin-top: 40px;
+  font-size: 40px;
+}
+#previous{
+  float: left ;
+}
+#next {
+  float: right;
+}
+table{
+  margin-top: 50px;
+}
+button{
+  
+  width: 80px;
+  background-color: 	#1E90FF;
+}
+</style>
+<script type="text/javascript">
+var day = new Date();
+var thisDay = day.getDay();
+var thisDate = day.getDate();
+var thisMonth = day.getMonth();
+var thisYear = day.getFullYear();
+var monthName = ["January","Februrary","March","April","May", "June","July","August","September","October","November","Decemeber"];
+var dayName = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+var numberDayOfMonth=[31,28,31,30,31,30,31,31,30,31,30,31];
+var html="";
+var header="";
+var temp= monthName[thisMonth] + " "+ 1 + thisYear;
+var first_day = new Date(temp);
+var firstday = first_day.getDay();
+var endDate = numberDayOfMonth[thisMonth];
+
+window.onload = function(){ 
+  show();
+}
+function pre(){
+  html="";
+  if(thisMonth==0){   thisMonth=11; thisYear--;}
+  else thisMonth--;
+  if(thisYear % 4 ==0 && thisYear %100 !=0 || thisYear%400 ==0) numberDayOfMonth[1]=29;
+  else numberDayOfMonth[1]=28;
+ temp= monthName[thisMonth] + " "+ 1 + thisYear;
+ first_day = new Date(temp);
+ firstday = first_day.getDay();
+ endDate = numberDayOfMonth[thisMonth];
+  show();
+};
+function next(){
+  html="";
+if(thisMonth==11) { thisMonth=0; thisYear++}
+  else thisMonth++;
+ temp= monthName[thisMonth] + " "+ 1 + thisYear;
+ first_day = new Date(temp);
+ firstday = first_day.getDay();
+ endDate = numberDayOfMonth[thisMonth];
+  show();
+};
+
+
+
+
+function show(){
+  document.getElementById("calendar-month").innerHTML = monthName[thisMonth] + " " + thisYear;
+  html+= '<table style="border: 1px"><tr>';
+  for(i=0; i<7; i++){
+    html+= '<td>' + dayName[i] +'</td>';
+  }
+  html += ' </tr><tr>';  
+  for(j=0; j<7; j++){
+    if(j==firstday) break;
+    else{
+      html += '<td>'+ ' '+'</td>';
+    }
+  }
+  var count=1;
+  for(; j<7; j++){
+    if(count==thisDate  &&thisMonth==day.getMonth()  && thisYear==day.getFullYear() ){ html+= '<td class="today" style=" background-color: #b22222">' + count + '</td>'}else{
+    html += '<td>' + count + '</td>';
+    count++;
+    }
+  }
+  html+= "</tr>";
+  for(k=2; k<7; k++){
+    html+="<tr>"
+    for(i=0; i<7; i++){
+      if(count > endDate) break;
+      if(count==thisDate && thisMonth==day.getMonth() && thisYear==day.getFullYear()){ html+= '<td class="today" style=" background-color: #b22222">' + count + '</td>'}
+      else{
+      html += ' <td>' + count + '</td>';
+      }
+      count++;
+    }
+  }
+  html+= ' </table>';  
+  document.getElementById("calendar").innerHTML = html; 
+}
+;
+
+
+
+
+
+</script>
+</header>
+<body>
+<div class="container">
+  <div id ="header"><button id ="previous" class="btn" onclick=pre()>Previous</button> <span id="calendar-month" style="font-size: 20px"></span><button id="next" class=" btn" onclick=next() >Next</button></div>
+  <div id= "calendar"> </div>
+</div>
+
+</body>
+</html>
