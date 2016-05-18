@@ -12,7 +12,7 @@
   background-color: #666666;
     top: 0; left: 0; right: 0; bottom: 0;
   width: 330px;
-  height: 440px;
+  height: 500px;
   margin: auto;
   border-radius: 10px;
   padding: 5px;
@@ -46,6 +46,7 @@ h3{
 var text="";
 var clear=false;
 var temp="";
+var memory = "";
 $(document).ready(function(){
   $("button").click(function(){
       var tepm = $(this).attr("value");
@@ -53,6 +54,11 @@ $(document).ready(function(){
 if(tepm==="AC"){text=""; $(".text").val(text);}
 if(tepm==="CE"){ text= text.slice(0, -1); $(".text").val(text);   }
 if(tepm==="="){ temp = eval(text); $(".text").val(temp); clear= true;}
+ if (tepm === "MR") { temp = eval(memory); $(".text").val(temp); clear=true;}
+    if (tepm === "MC") { memory="";}
+    if (tepm === "M+") { memory += '+'+ $(".text").val() ; }
+    if (tepm === "M-") { memory += '-'+ $(".text").val(); memory=memory.replace("--","+");}
+
                    
   });
 });
@@ -64,6 +70,12 @@ if(tepm==="="){ temp = eval(text); $(".text").val(temp); clear= true;}
  
    <input type="text" class="text" readonly style=" font-size: 40px">
    <table class="tble">
+   <tr>
+      <td> <button class="button" value="MC">MC</button></td>
+      <td> <button class="button" value="MR" id= "M">MR</button></td>
+      <td> <button class="button" value="M+">M+</button></td>
+      <td> <button class="button" value="M-">M-</button></td>
+    </tr>
     
     <tr>
       <td> <button class="button" value="AC">AC</button></td>
